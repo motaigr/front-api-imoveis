@@ -29,14 +29,21 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
-  const handleCalculate = () => {
-    setIsLoading(true)
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      setShowResult(true)
-    }, 2500)
-  }
+  const [precoSugerido, setPrecoSugerido] = useState<number | null>(null)
+
+const handleCalculate = async () => {
+  setIsLoading(true)
+  const vagasNum = vagas === '2+' ? 2 : Number(vagas)
+  const quartosNum = quartos === '3+' ? 3 : Number(quartos)
+  
+  const response = await fetch(
+    `https://api-imoveis-prpm.onrender.com/calcular?bairro=${bairro}&area=${area}&quartos=${quartosNum}&vagas=${vagasNum}`
+  )
+  const data = await response.json()
+  setPrecoSugerido(data.preco_sugerido)
+  setIsLoading(false)
+  setShowResult(true)
+}
 
   return (
     <div className="w-full">
@@ -243,9 +250,7 @@ export default function Index() {
             <div className="py-10 bg-white rounded-2xl shadow-subtle border border-slate-100 mb-8 transform transition-transform hover:scale-[1.01] duration-300">
               <div className="flex items-center justify-center flex-wrap gap-2 text-4xl md:text-5xl font-bold tracking-tight text-primary">
                 <span className="text-2xl md:text-3xl font-medium text-muted-foreground">R$</span>
-                <span>850.000</span>
-                <span className="text-2xl text-muted-foreground/40 font-normal mx-2">-</span>
-                <span>920.000</span>
+                <span>{precoSugerido?.toLocaleString('pt-BR')}</span>
               </div>
               <div className="mt-6 flex items-center justify-center gap-2">
                 <TrendingUp className="h-4 w-4 text-emerald-500" />

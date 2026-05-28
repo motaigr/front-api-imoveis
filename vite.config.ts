@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => ({
     host: '::',
     port: 8080,
   },
+  base: '/front-skip/',
   build: {
     outDir: mode === 'development' ? 'dev-dist' : 'dist',
     minify: mode !== 'development',
