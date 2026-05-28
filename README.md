@@ -120,12 +120,6 @@ Este template inclui uma biblioteca completa de componentes Shadcn UI baseados e
 6. Crie a build: `npm run build`
 7. Visualize a build: `npm run preview`
 
-## 📦 Build e Deploy
+## 🌐 Demo
 
-Para criar uma build otimizada para produção:
-
-```bash
-npm run build
-```
-
-Os arquivos otimizados serão gerados na pasta `dist/` e estarão prontos para deploy.
+Acesse o projeto em produção: [front-skip.vercel.app](https://front-skip.vercel.app)
