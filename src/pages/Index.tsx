@@ -30,6 +30,7 @@ export default function Index() {
   const [showResult, setShowResult] = useState(false)
 
   const [precoSugerido, setPrecoSugerido] = useState<number | null>(null)
+  const [valorM2, setValorM2] = useState<number | null>(null)
 
 const handleCalculate = async () => {
   setIsLoading(true)
@@ -41,6 +42,7 @@ const handleCalculate = async () => {
   )
   const data = await response.json()
   setPrecoSugerido(data.preco_sugerido)
+  setValorM2(data.valor_m2)
   setIsLoading(false)
   setShowResult(true)
 }
@@ -255,7 +257,7 @@ const handleCalculate = async () => {
               <div className="mt-6 flex items-center justify-center gap-2">
                 <TrendingUp className="h-4 w-4 text-emerald-500" />
                 <p className="text-sm text-muted-foreground font-medium">
-                  Preço médio estimado: R$ 10.500/m²
+                  Preço médio estimado: R$ {valorM2?.toLocaleString('pt-BR')}/m²
                 </p>
               </div>
             </div>
