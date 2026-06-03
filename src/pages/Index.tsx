@@ -42,7 +42,7 @@ const handleCalculate = async () => {
   )
   const data = await response.json()
   setPrecoSugerido(data.preco_sugerido)
-  setValorM2(data.valor_m2)
+  setValorM2(data.preco_m2)
   setIsLoading(false)
   setShowResult(true)
 }
