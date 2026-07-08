@@ -101,7 +101,7 @@ export default function Layout() {
           <div className="flex flex-col items-center md:items-start gap-2">
             <span className="text-2xl font-bold tracking-tight text-primary">Valora</span>
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © 2024 Valora Real Estate Analytics.
+              © 2026 Valora Real Estate Analytics.
               <br className="md:hidden" /> Todos os direitos reservados.
             </p>
           </div>
