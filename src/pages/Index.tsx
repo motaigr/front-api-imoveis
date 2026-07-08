@@ -32,13 +32,24 @@ export default function Index() {
   const [precoSugerido, setPrecoSugerido] = useState<number | null>(null)
   const [valorM2, setValorM2] = useState<number | null>(null)
 
+const [tipo, setTipo] = useState('apartamento')
+
+const bairros = [
+  "Água Verde", "Ahú", "Alto da Glória", "Alto da XV", "Batel", "Boa Vista",
+  "Boqueirão", "Cabral", "Campo Comprido", "Centro", "Centro Cívico", "Cristo Rei",
+  "Ecoville", "Fazendinha", "Hugo Lange", "Jardim Botânico", "Jardim das Américas",
+  "Juvevê", "Mercês", "Mossunguê", "Novo Mundo", "Pinheirinho", "Portão",
+  "Rebouças", "Santa Felicidade", "Santa Quitéria", "Seminário", "Tarumã",
+  "Uberaba", "Vila Izabel", "Xaxim"
+]
+
 const handleCalculate = async () => {
   setIsLoading(true)
   const vagasNum = vagas === '2+' ? 2 : Number(vagas)
   const quartosNum = quartos === '3+' ? 3 : Number(quartos)
   
   const response = await fetch(
-    `https://api-imoveis-prpm.onrender.com/calcular?bairro=${bairro}&area=${area}&quartos=${quartosNum}&vagas=${vagasNum}`
+    `https://api-imoveis-prpm.onrender.com/calcular?bairro=${bairro}&area=${area}&quartos=${quartosNum}&vagas=${vagasNum}&tipo=${tipo}`
   )
   const data = await response.json()
   setPrecoSugerido(data.preco_sugerido)
@@ -93,15 +104,26 @@ const handleCalculate = async () => {
                         <SelectValue placeholder="Selecione o bairro" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="Centro">Centro</SelectItem>
-                        <SelectItem value="Batel">Batel</SelectItem>
-                        <SelectItem value="Agua Verde">Agua Verde</SelectItem>
-                        <SelectItem value="Novo Mundo">Novo Mundo</SelectItem>
-                        <SelectItem value="Pinheirinho">Pinheirinho</SelectItem>
-                        <SelectItem value="Cajuru">Cajuru</SelectItem>
+                          {bairros.map((b) => (
+                          <SelectItem key={b} value={b}>{b}</SelectItem>
+                          ))}
                       </SelectContent>
                     </Select>
                   </div>
+                </div>
+
+                <div className="lg:col-span-2 space-y-3">
+                  <Label className="text-sm font-medium text-foreground">Tipo</Label>
+                  <Select value={tipo} onValueChange={setTipo}>
+                    <SelectTrigger className="h-12 text-base rounded-xl border-muted-foreground/20">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="apartamento">Apartamento</SelectItem>
+                      <SelectItem value="casa">Casa</SelectItem>
+                      <SelectItem value="comercial">Comercial</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="lg:col-span-3 space-y-3">
